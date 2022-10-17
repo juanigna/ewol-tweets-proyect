@@ -1,34 +1,23 @@
-import { useContext } from 'react';
 import Card from '../../../../components/Card';
-import AppContext from '../../../../contexts/AppContext';
+import LoadingOverlay from '../../../../components/loaders/LoadingOverlay';
+import Logo from '../../../../components/Logo';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
+import useRegisterUser from '../hooks/useRegisterUser';
 import RegisterForm from '../RegisterForm';
-import UserWelcome from '../UserWelcome';
 import './style.css';
 
 const RegisterLayout = () => {
-    const { data: appData, setData: setAppData } = useContext(AppContext);
-
-    const handleButtonClick = (formData) => {
-        setAppData({
-            ...appData,
-            ...formData,
-        });
-    };
-
-    const handleLogout = () => {
-        setAppData({
-            ...appData,
-            name: undefined,
-        });
-    };
+    const [loading, error, registerUser] = useRegisterUser();
+    const isMobile = useMediaQuery('(max-width: 768px)');
     return (
-        <div className="register-layout">
-            <Card>
-                {appData.name ? (
-                    <UserWelcome name={appData.name} onLogout={handleLogout} />
-                ) : (
-                    <RegisterForm onSubmit={handleButtonClick} />
-                )}
+        <div className="register-layout-container">
+            <Logo width={isMobile ? 120 : 200} />
+            <Card className="card">
+                <LoadingOverlay visible={loading} />
+                <span className="title">Bienvenidxs!</span>
+                <span className="subtitle">Regístrate para poder twittear</span>
+                {error && <span className="error-message">{error}</span>}
+                <RegisterForm onSubmit={registerUser} />
             </Card>
         </div>
     );

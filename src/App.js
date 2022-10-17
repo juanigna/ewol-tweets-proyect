@@ -1,13 +1,11 @@
 import AppContextProvider from './app/contexts/AppContext/AppContextProvider';
-import RegisterLayout from './app/pages/Register/components/Layout';
-import './global-styles.css';
+import './app/global-styles.css';
+import AppRouter from './app/router/AppRouter';
 
 function App() {
     return (
         <AppContextProvider>
-            <div className="App">
-                <RegisterLayout />
-            </div>
+            <AppRouter />
         </AppContextProvider>
     );
 }

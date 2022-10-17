@@ -1,34 +1,36 @@
 import Button from '../../../../components/Button';
 import InputText from '../../../../components/InputText';
 import { useState } from 'react';
+import './style.css';
+import InputImage from '../../../../components/InputImage';
 
 const RegisterForm = ({ onSubmit }) => {
     const [formValue, setFormValue] = useState({});
 
-    const handleInputTextChange = (e) => {
+    const handleInputChange = (newValue) => {
         setFormValue({
             ...formValue,
-            [e.target.name]: e.target.value,
+            ...newValue,
         });
     };
     return (
-        <div>
+        <div className="form-container">
+            <InputImage
+                className="input-image"
+                onChange={(imageBase64) =>
+                    handleInputChange({ photo: imageBase64 })
+                }
+            />
             <InputText
+                className="input-text-name"
                 placeholder="Nombre"
                 value={formValue.name}
-                name="name"
-                onChange={handleInputTextChange}
+                onChange={(e) => handleInputChange({ name: e.target.value })}
             />
-            <InputText
-                placeholder="Apellido"
-                value={formValue.apellido}
-                name="apellido"
-                onChange={handleInputTextChange}
-            />
-
-            <Button onClick={() => onSubmit(formValue)}>Guardar</Button>
+            <Button className="save-data" onClick={() => onSubmit(formValue)}>
+                Guardar
+            </Button>
         </div>
     );
 };
-
 export default RegisterForm;

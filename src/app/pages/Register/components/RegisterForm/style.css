@@ -1,0 +1,31 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-image {
+    margin-bottom: 20px;
+}
+
+.form-container > button {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.input-text-name {
+    padding: 0.6em;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    width: 100%;
+}
+
+.save-data {
+    padding: 0.9em 2em;
+    width: 100%;
+    background-color: #a800dd;
+    color: #fff;
+    border-radius: 10px;
+    border-style: none;
+    font-weight: bold;
+}
